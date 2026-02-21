@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>이벤트 | 바로그의원 덕천</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Pretendard", sans-serif;
+}
+
+body {
+    background: #fff;
+    color: #111;
+}
+
+/* 공통 */
+.inner {
+    max-width: 1200px;
+    margin: auto;
+    padding: 0 20px;
+}
+
+/* 헤더 */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    border-bottom: 1px solid #eee;
+    z-index: 999;
+}
+
+.header-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+    color: #111;
+    text-decoration: none;
+    }
+
+.nav-menu {
+    display: flex;
+    gap: 30px;
+    list-style: none;
+    align-items: center;
+}
+
+.nav-menu a {
+    text-decoration: none;
+    color: #111;
+    font-size: 15px;
+}
+
+/* 페이지 타이틀 */
+.page-title {
+    margin-top: 140px;
+    margin-bottom: 40px;
+    font-size: 32px;
+    font-weight: bold;
+}
+
+/* 이벤트 리스트 */
+.event-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+/* 카드 */
+.event-card {
+    border: 1px solid #eee;
+    overflow: hidden;
+    transition: 0.2s;
+    background: #fff;
+}
+
+.event-card:hover {
+    transform: translateY(-5px);
+}
+
+/* 이미지 */
+.event-img {
+    height: 260px;
+    background-size: cover;
+    background-position: center;
+}
+
+/* 내용 */
+.event-content {
+    padding: 18px;
+}
+
+.event-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.event-date {
+    font-size: 13px;
+    color: #999;
+}
+
+/* 종료 이벤트 */
+.event-ended {
+    position: relative;
+    filter: grayscale(70%) brightness(0.7);
+}
+
+.event-ended::after {
+    content: "종료";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 260px;
+    background: rgba(0,0,0,0.5);
+    color: #fff;
+    font-size: 28px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 3px;
+}
+
+/* 푸터 */
+footer {
+    margin-top: 80px;
+    background: #111;
+    color: #bbb;
+    padding: 40px 0;
+    font-size: 14px;
+}
+
+.footer-links {
+    margin-bottom: 15px;
+}
+
+.footer-links a {
+    color: #bbb;
+    margin-right: 15px;
+    text-decoration: none;
+}
+
+.footer-info span {
+    margin-right: 10px;
+}
+
+/* 반응형 */
+@media (max-width: 900px) {
+    .event-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .event-list {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* 팝업 */
+.popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup img {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 10px;
+}
+
+.close {
+    position: absolute;
+    top: 40px;
+    right: 50px;
+    font-size: 40px;
+    color: #fff;
+    cursor: pointer;
+}
+
+
+/* 사이드바 */
+.side-bar {
+    position: fixed;
+    right: 30px;
+    bottom: 120px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    z-index: 9999;
+}
+
+.side-bar a {
+    width: 60px;
+    height: 60px;
+    background: #111;
+    color: #fff;
+    text-decoration: none;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: 0.25s;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.side-bar a:hover {
+    background: #e60023;
+    transform: translateY(-3px);
+}
+
+@media (max-width: 600px) {
+    .side-bar {
+        right: 10px;
+        bottom: 80px;
+    }
+
+    .side-bar a {
+        width: 50px;
+        height: 50px;
+        font-size: 11px;
+    }
+}
+
+
+
+
+</style>
+</head>
+
+<!-- 팝업 -->
+<div id="eventPopup" class="popup">
+    <span class="close" onclick="closePopup()">×</span>
+    <img id="popupImg">
+</div>
+
+
+<script>
+function openPopup(imgSrc) {
+    document.getElementById("eventPopup").style.display = "flex";
+    document.getElementById("popupImg").src = imgSrc;
+}
+
+function closePopup() {
+    document.getElementById("eventPopup").style.display = "none";
+}
+</script>
+<body>
+
+<!-- 헤더 -->
+<header>
+    <div class="inner">
+        <div class="header-line">
+
+            <a href="index.html" class="logo">바로그의원 덕천</a>
+
+            <ul class="nav-menu">
+            <li><a href="staff.html">의료진소개</a></li>
+            <li><a href="event.html">이벤트</a></li>
+            <li><a href="#">리프팅</a></li>
+            <li><a href="#">콜라겐부스터</a></li>
+            <li><a href="#">스킨부스터</a></li>
+            <li><a href="#">색소</a></li>
+            <li><a href="#">여드름</a></li>
+            <li><a href="#">칭찬/불만</a></li>
+            <li><a href="#"></a></li>
+            </ul>
+
+        </div>
+    </div>
+</header>
+
+<!-- 이벤트 영역 -->
+<section class="inner">
+
+    <h2 class="page-title">EVENT</h2>
+
+    <div class="event-list">
+
+        <!-- 이벤트 1 -->
+        <div class="event-card">
+            <div class="event-img"
+                onclick="openPopup('26년3월이벤트.jpg')"
+                style="background-image:url('26년3월이벤트메인.png')">
+            </div>
+            <div class="event-content">
+                <div class="event-title">향긋한 꽃내음 가득한 설레는 봄이 왔어요</div>
+                <div class="event-date">2026.03.02 - 2026.03.31</div>
+            </div>
+        </div>
+
+        <!-- 종료 이벤트 -->
+        <div class="event-card event-ended">
+            <div class="event-img" style="background-image:url('26년3월이벤트메인.png')"></div>
+            <div class="event-content">
+                <div class="event-title">향긋한 꽃내음 가득한 설레는 봄이 왔어요</div>
+                <div class="event-date">2026.03.02 - 2026.03.31</div>
+            </div>
+        </div>
+
+        <!-- 종료 이벤트 -->
+        <div class="event-card event-ended">
+            <div class="event-img" style="background-image:url('26년3월이벤트메인.png')"></div>
+            <div class="event-content">
+                <div class="event-title">향긋한 꽃내음 가득한 설레는 봄이 왔어요</div>
+                <div class="event-date">2026.03.02 - 2026.03.31</div>
+            </div>
+        </div>
+        
+        
+        <!-- 종료 이벤트 -->
+        <div class="event-card event-ended">
+            <div class="event-img" style="background-image:url('26년3월이벤트메인.png')"></div>
+            <div class="event-content">
+                <div class="event-title">향긋한 꽃내음 가득한 설레는 봄이 왔어요</div>
+                <div class="event-date">2026.03.02 - 2026.03.31</div>
+            </div>
+        </div>
+
+        
+        <!-- 종료 이벤트 -->
+        <div class="event-card event-ended">
+            <div class="event-img" style="background-image:url('26년3월이벤트메인.png')"></div>
+            <div class="event-content">
+                <div class="event-title">향긋한 꽃내음 가득한 설레는 봄이 왔어요</div>
+                <div class="event-date">2026.03.02 - 2026.03.31</div>
+            </div>
+        </div>
+
+        
+        <!-- 종료 이벤트 -->
+        <div class="event-card event-ended">
+            <div class="event-img" style="background-image:url('26년3월이벤트메인.png')"></div>
+            <div class="event-content">
+                <div class="event-title">향긋한 꽃내음 가득한 설레는 봄이 왔어요</div>
+                <div class="event-date">2026.03.02 - 2026.03.31</div>
+            </div>
+        </div>
+
+        
+        <!-- 종료 이벤트 -->
+        <div class="event-card event-ended">
+            <div class="event-img" style="background-image:url('26년3월이벤트메인.png')"></div>
+            <div class="event-content">
+                <div class="event-title">향긋한 꽃내음 가득한 설레는 봄이 왔어요</div>
+                <div class="event-date">2026.03.02 - 2026.03.31</div>
+            </div>
+        </div>
+
+
+    </div>
+
+</section>
+
+<!-- 푸터 -->
+<footer>
+    <div class="inner">
+
+        <div class="footer-links">
+            <a href="#">사이트 이용약관</a>
+            <a href="#">개인정보처리방침</a>
+        </div>
+
+        <div class="footer-info">
+            <span>상호명 : 바로그의원 덕천</span>
+            <span>대표 : 이용재</span>
+            <span>전화번호 : 051-343-2255</span><br>
+            <span>주소 : 부산시 북구 만덕대로 24 국민은행건물 4층</span>
+        </div>
+
+    </div>
+</footer>
+
+<!-- 팝업 -->
+<div id="eventPopup" class="popup">
+    <span class="close" onclick="closePopup()">×</span>
+    <img id="popupImg">
+</div>
+
+<!-- 사이드바 -->
+<div class="side-bar">
+
+<a href="https://pf.kakao.com" target="_blank">
+카톡
+</a>
+
+<a href="https://instagram.com" target="_blank">
+인스타
+</a>
+
+<a href="https://blog.naver.com" target="_blank">
+블로그
+</a>
+
+<a onclick="scrollToTop()" style="cursor:pointer;">
+TOP
+</a>
+
+</div>
+
+<script>
+function openPopup(imgSrc) {
+    document.getElementById("eventPopup").style.display = "flex";
+    document.getElementById("popupImg").src = imgSrc;
+}
+
+function closePopup() {
+    document.getElementById("eventPopup").style.display = "none";
+}
+
+function scrollToTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
+</script>
+
+</body>
+</html>
