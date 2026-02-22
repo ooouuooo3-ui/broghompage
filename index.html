@@ -18,31 +18,31 @@
         section { padding: 80px 0; }
 
         /* 상단 헤더 */
-        header {position: absolute; /* 헤더를 띄워서 영상 위로 올림 */
+        header {position: absolute; 
             top: 0;
             left: 0;
             width: 100%;
             text-align: center; 
             padding: 30px 0; 
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* 구분선도 반투명한 흰색으로 변경 */
-            z-index: 999; /* 비디오보다 위에 오도록 설정 */
-            background-color: transparent; /* 배경을 완전히 투명하게 설정 */ }
-        .logo { color: #ffffff; /* 영상 위에서 잘 보이게 흰색 */
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2); 
+            z-index: 999; 
+            background-color: transparent; }
+        .logo { color: #ffffff; 
             font-size: 28px; 
             font-weight: bold; 
             letter-spacing: -1px; 
             margin-bottom: 20px; 
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5); /* 영상이 밝아도 글씨가 보이도록 그림자 추가 */ }
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
         .nav-menu { display: flex; 
             justify-content: center; 
             gap: 30px; 
             flex-wrap: wrap; }
         .nav-menu li a { 
             font-size: 15px; 
-            color: #ffffff; /* 메뉴 글씨 흰색 */
+            color: #ffffff; 
             font-weight: bold; 
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.5); /* 메뉴 글씨에도 그림자 추가 */ }
-        .nav-menu li a:hover {color: #dddddd; /* 마우스 올렸을 때 살짝 회색빛 돌게 */ }
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5); }
+        .nav-menu li a:hover {color: #dddddd; }
 
         /* 메인 배너 영역 */
         .main-banner {
@@ -77,12 +77,34 @@
         .card-desc { font-size: 14px; color: #777; margin-bottom: 15px; padding: 0 15px; word-break: keep-all; }
         .card-price { font-size: 18px; font-weight: bold; color: #d9534f; }
 
-        /* 시그니처 프로그램 (가로 스크롤형 또는 나열) */
-        .signature-bg { background-color: #fafafa; }
-        .signature-list { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
-        .signature-item { width: 150px; text-align: center; }
-        .sig-icon { width: 100px; height: 100px; background-color: #ddd; border-radius: 50%; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; color: #777; }
-        .sig-name { font-weight: bold; font-size: 15px; }
+        /* 베스트셀러 프로그램 (가로 스크롤형 또는 나열) */
+        .BestSellers-bg { background-color: #fafafa; }
+        .BestSellers-list { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+        .BestSellers-item { width: 150px; text-align: center; }
+        .BestSellers-icon { 
+            width: 100px; 
+            height: 100px; 
+            background-color: #fff; /* 배경을 흰색으로 하면 이미지가 더 잘 보여요 */
+            border-radius: 50%; 
+            margin: 0 auto 15px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            overflow: hidden; /* 원 밖으로 나가는 이미지 숨김 */
+            border: 1px solid #eee; /* 살짝 테두리를 주면 더 깔끔합니다 */
+        }
+        /* 실제 이미지 스타일 */
+        .BestSellers-icon img {
+            width: 100%; 
+            height: 100%; 
+            object-fit: contain; /* 제품 이미지는 잘리지 않게 contain을 추천해요 */
+            padding: 10px; /* 이미지와 원 테두리 사이에 여백을 줍니다 */
+        }
+        /* 이름 스타일 */
+        .BestSellers-name {
+            font-weight: bold;
+            font-size: 15px;
+        }
 
         /* Promise You 영역 */
         .promise-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
@@ -111,230 +133,176 @@
             overflow: hidden;
             width: 100%;
             }
-
         .best-track {
             display: flex;
             gap: 30px;
             animation: bestSlide 28s linear infinite;
             }
-
         .best-track .card {
             min-width: 280px;
             }
-
-        /* 왼쪽으로 이동 */
-            @keyframes bestSlide {
-            0% {
-                transform: translateX(0);
-            }
-            100% {
-                transform: translateX(-50%);
-            }
-             } 
+        @keyframes bestSlide {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        } 
 
          .event-ended {
              position: relative;
              filter: grayscale(70%) brightness(0.7);
                 }
-
          .event-ended::after {
             content: "종료";
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 250px;
-            background: rgba(0,0,0,0.5);
-            color: #fff;
-            font-size: 28px;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            top: 0; left: 0; width: 100%; height: 250px;
+            background: rgba(0,0,0,0.5); color: #fff;
+            font-size: 28px; font-weight: bold;
+            display: flex; align-items: center; justify-content: center;
             letter-spacing: 3px;
         }
          .event-date {
-            font-size: 13px;
-            color: #999;
-            margin-top: -5px;
-            margin-bottom: 10px;
+            font-size: 13px; color: #999;
+            margin-top: -5px; margin-bottom: 10px;
         }
+
         /* 사이드바 */
         .side-bar {
-            position: fixed;
-            right: 30px;
-            bottom: 120px;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
+            position: fixed; right: 30px; bottom: 120px;
+            display: flex; flex-direction: column; gap: 12px;
             z-index: 9999;
         }
         .side-bar a {
-            width: 60px;
-            height: 60px;
-            background: #111;
-            color: #fff;
-            text-decoration: none;
-            font-size: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            transition: 0.25s;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            width: 60px; height: 60px; background: #111; color: #fff;
+            text-decoration: none; font-size: 12px;
+            display: flex; align-items: center; justify-content: center;
+            border-radius: 50%; transition: 0.25s; box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
         .side-bar a:hover {
-            background: #d9534f;
-            transform: translateY(-3px);
+            background: #d9534f; transform: translateY(-3px);
         }
         @media (max-width: 600px) {
-            .side-bar {
-                right: 10px;
-                bottom: 80px;
-            }
-
-            .side-bar a {
-                width: 50px;
-                height: 50px;
-                font-size: 11px;
-            }
+            .side-bar { right: 10px; bottom: 80px; }
+            .side-bar a { width: 50px; height: 50px; font-size: 11px; }
         }
-                
-        /* =========================
-   모바일 반응형
-   ========================= */
-@media (max-width: 1024px) {
 
-    /* 헤더 */
-    header {
-        padding: 20px 10px;
-    }
+        /* --- 이벤트 팝업 스타일 --- */
+        .popup-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.6); 
+            display: flex; justify-content: center; align-items: center;
+            z-index: 9999; opacity: 0; visibility: hidden;
+            transition: opacity 0.4s ease, visibility 0.4s;
+        }
+        .popup-overlay.active { opacity: 1; visibility: visible; }
 
-    .logo {
-        font-size: 22px;
-        margin-bottom: 10px;
-    }
+        .popup-content {
+            background: #ffffff;
+            width: 90%;
+            max-width: 1100px; 
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+            position: relative;
+            transform: translateY(20px);
+            transition: transform 0.4s ease;
+            border-radius: 10px; 
+            overflow: hidden; 
+        }
+        .popup-overlay.active .popup-content { transform: translateY(0); }
 
-    .nav-menu {
-        gap: 15px;
-    }
+        .popup-body { padding: 0; text-align: center; }
 
-    .nav-menu li a {
-        font-size: 13px;
-    }
+        /* 메인 슬라이더 컨테이너 */
+        .slider-container {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+            background: #fdfdfd; 
+        }
+        
+        /* [수정] 이미지가 5장이므로 전체 너비를 500%로 변경 */
+        .slider-track {
+            display: flex;
+            width: 500%; 
+            transition: transform 0.5s ease-in-out;
+        }
+        
+        /* [수정] 5장의 이미지가 500% 안에서 각각 균등하게 차지하도록 20%로 변경 */
+        .slider-track img {
+            width: 20%; 
+            display: block;
+            object-fit: cover;
+        }
 
-    /* 섹션 패딩 줄이기 */
-    section {
-        padding: 60px 0;
-    }
+        /* ★ 고급스러운 텍스트 탭(칸) 스타일 */
+        .slider-tabs {
+            display: flex;
+            width: 100%;
+            background-color: #ffffff;
+            border-top: 1px solid #eee;
+        }
+        .tab {
+            flex: 1; 
+            padding: 12px 10px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            color: #999;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+            border-right: 1px solid #eee;
+        }
+        .tab:last-child {
+            border-right: none;
+        }
+        .tab.active {
+            background-color: #eae7e0; 
+            color: #222; 
+        }
+        .tab:hover:not(.active) {
+            background-color: #f5f4f2;
+            color: #555;
+        }
 
-    .section-title {
-        font-size: 26px;
-    }
-
-    .section-subtitle {
-        font-size: 14px;
-    }
-
-    /* 카드 높이 */
-    .card-img {
-        height: 200px;
-    }
-
-    /* Promise */
-    .promise-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-}
-
-/* =========================
-   모바일 (폰)
-   ========================= */
-@media (max-width: 768px) {
-
-    /* 메뉴 세로 정렬 */
-    .nav-menu {
-        flex-wrap: wrap;
-        gap: 10px;
-    }
-
-    .nav-menu li a {
-        font-size: 12px;
-    }
-
-    /* 메인 영상 높이 */
-    .main-banner {
-        height: 70vh;
-    }
-
-    /* 이벤트 카드 */
-    .grid-layout {
-        grid-template-columns: 1fr;
-    }
-
-    /* BEST 슬라이드 카드 */
-    .best-track .card {
-        min-width: 220px;
-    }
-
-    /* 시그니처 */
-    .signature-item {
-        width: 120px;
-    }
-
-    .sig-icon {
-        width: 80px;
-        height: 80px;
-    }
-
-    /* Promise */
-    .promise-grid {
-        grid-template-columns: 1fr;
-    }
-
-    /* 지도 + 정보 */
-    .contact-wrap {
-        flex-direction: column;
-    }
-
-    .contact-map {
-        height: 250px;
-    }
-
-}
-
-/* =========================
-   초소형 모바일
-   ========================= */
-@media (max-width: 480px) {
-
-    .logo {
-        font-size: 20px;
-    }
-
-    .section-title {
-        font-size: 22px;
-    }
-
-    .section-subtitle {
-        font-size: 13px;
-    }
-
-    .card-title {
-        font-size: 16px;
-    }
-
-    .card-price {
-        font-size: 16px;
-    }
-
-}
-
-
+        .popup-footer { display: flex; border-top: 1px solid #ddd; }
+        .popup-footer button {
+            flex: 1; padding: 10px;
+            border: none; background: #ffffff;
+            cursor: pointer; font-size: 0.95rem; color: #555; font-weight: bold;
+            transition: background 0.3s, color 0.3s;
+        }
+        .popup-footer button:first-child { border-right: 1px solid #ddd; }
+        .popup-footer button:hover { background: #f9f9f9; color: #111; }
     </style>
 </head>
 <body>
+
+    <div class="popup-overlay" id="mainPopup">
+        <div class="popup-content">
+            <div class="popup-body">
+                <div class="slider-container">
+                    <div class="slider-track" id="sliderTrack">
+                        <img src="./팝업써마지.jpg" alt="써마지런칭">
+                        <img src="./울쎄라런칭.png" alt="울쎄라런칭">
+                        <img src="./메인팝업3.png" alt="덕천점 1회 체험가">
+                        <img src="./메인팝업1.png" alt="덕천점 피부 이벤트">
+                        <img src="./메인팝업2.png" alt="덕천점 쁘띠 이벤트">
+                        
+                    </div>
+                </div>
+                <div class="slider-tabs">
+                    <div class="tab active" data-index="0">써마지 런칭</div>
+                    <div class="tab" data-index="1">울쎄라피프라임 런칭</div>
+                    <div class="tab" data-index="2">1회 이벤트</div>
+                    <div class="tab" data-index="3">피부 이벤트</div>
+                    <div class="tab" data-index="4">쁘띠 이벤트1</div>
+                    
+                </div>
+            </div>
+            <div class="popup-footer">
+                <button id="closeTodayBtn">오늘 하루 보지 않기</button>
+                <button id="closeBtn">닫기</button>
+            </div>
+        </div>
+    </div>
+
     <header>
         <div class="logo">바로그의원 덕천</div>
         <ul class="nav-menu">
@@ -354,6 +322,25 @@
         <video autoplay muted loop playsinline>
             <source src="./main.mp4" type="video/mp4"> </video>
     </div>
+
+    <section class="BestSellers-bg">
+        <div class="inner">
+            <h2 class="section-title"> Best Sellers PROGRAM</h2>
+            <p class="section-subtitle">바로그의원 덕천 인기시술</p>
+            <div class="BestSellers-list">
+                <div class="BestSellers-item"><div class="BestSellers-icon">
+                    <img src="./엘라비에리투오아이콘.png" alt="엘라비에 리투오"></div>
+                    <div class="BestSellers-name"> 엘라비에 리투오</div></div>
+                <div class="BestSellers-item"><div class="BestSellers-icon">아이콘</div><div class="BestSellers-name"> 울쎄라</div></div>
+                <div class="BestSellers-item"><div class="BestSellers-icon">아이콘</div><div class="BestSellers-name"> 리쥬란HB플러스</div></div>
+                <div class="BestSellers-item"><div class="BestSellers-icon">아이콘</div><div class="BestSellers-name"> 온다리프팅</div></div>
+                <div class="BestSellers-item"><div class="BestSellers-icon">아이콘</div><div class="BestSellers-name"> 여드름관리</div></div>
+                <div class="BestSellers-item"><div class="BestSellers-icon">아이콘</div><div class="BestSellers-name"> 스킨보톡스</div></div>
+                <div class="BestSellers-item"><div class="BestSellers-icon">아이콘</div><div class="BestSellers-name"> 슈링크유니버스</div></div>
+            </div>
+        </div>
+    </section>
+
 
     <section class="inner">
         <h2 class="section-title">BROG EVENT</h2>
@@ -377,23 +364,6 @@
                 <div class="card-desc">향긋한 꽃내음 가득한 설레는 봄이 왔어요</div>
                 <div class="event-date">2026.03.02 - 2026.03.31</div>
             </div>
-           
-        </div>
-    </section>
-
-    <section class="signature-bg">
-        <div class="inner">
-            <h2 class="section-title">SIGNATURE PROGRAM</h2>
-            <p class="section-subtitle">리프팅의 명가, 아이코닉 리프팅을 소개합니다.</p>
-            <div class="signature-list">
-                <div class="signature-item"><div class="sig-icon">아이콘</div><div class="sig-name">아이코닉 써마지</div></div>
-                <div class="signature-item"><div class="sig-icon">아이콘</div><div class="sig-name">아이코닉 올리지오</div></div>
-                <div class="signature-item"><div class="sig-icon">아이콘</div><div class="sig-name">아이코닉 볼뉴머</div></div>
-                <div class="signature-item"><div class="sig-icon">아이콘</div><div class="sig-name">아이코닉 울쎄라피</div></div>
-                <div class="signature-item"><div class="sig-icon">아이콘</div><div class="sig-name">아이코닉 티타늄</div></div>
-                <div class="signature-item"><div class="sig-icon">아이콘</div><div class="sig-name">아이코닉 쿨소닉</div></div>
-                <div class="signature-item"><div class="sig-icon">아이콘</div><div class="sig-name">아이코닉 슈링크</div></div>
-            </div>
         </div>
     </section>
 
@@ -403,103 +373,72 @@
 
     <div class="best-slider">
         <div class="best-track">
-
-            <!-- 카드 14개 -->
             <div class="card">
-                <div class="card-img"><img src="./써마지.png" alt="써마지 FLX">
-                </div>
+                <div class="card-img"><img src="./써마지.png" alt="써마지 FLX"></div>
                 <div class="card-title">써마지 FLX</div>
                 <div class="card-desc">고주파 에너지로 탄력 UP [정품팁사용]</div>
-                <div class="card-price">1,300,000원 부터</div>
             </div>
-
             <div class="card">
                 <div class="card-img"><img src="./울쎄라.png" alt="울쎄라피프라임"></div>
                 <div class="card-title">울쎄라피 프라임</div>
                 <div class="card-desc">더 깊은 피부층까지 정밀하게!</div>
-                <div class="card-price">600,000원 부터</div>
             </div>
-
             <div class="card">
                 <div class="card-img"><img src="./더블로골드.png" alt="더블로골드"></div>
                 <div class="card-title">더블로골드</div>
                 <div class="card-desc">차세대 고주파 리프팅</div>
-                <div class="card-price">690,000원 부터</div>
             </div>
-
             <div class="card">
                 <div class="card-img"><img src="./브이로어드밴스.png" alt="브이로어드밴스"></div>
                 <div class="card-title">브이로어드밴스</div>
-                <div class="card-price">550,000원 부터</div>
             </div>
-
             <div class="card">
                 <div class="card-img"><img src="./올리지오.png" alt="올리지오"></div>
                 <div class="card-title">올리지오</div>
-                <div class="card-price">450,000원 부터</div>
             </div>
-
             <div class="card">
                 <div class="card-img"><img src="./인모드.png" alt="인모드"></div>
                 <div class="card-title">인모드</div>
-                <div class="card-price">520,000원 부터</div>
             </div>
-
             <div class="card">
                 <div class="card-img"><img src="./슈링크유니버스.png" alt="슈링크유니버스"></div>
                 <div class="card-title">슈링크 유니버스</div>
-                <div class="card-price">390,000원 부터</div>
             </div>
             <div class="card">
-                <div class="card-img"><img src="./써마지.png" alt="써마지 FLX">
-                </div>
+                <div class="card-img"><img src="./써마지.png" alt="써마지 FLX"></div>
                 <div class="card-title">써마지 FLX</div>
                 <div class="card-desc">고주파 에너지로 탄력 UP [정품팁사용]</div>
-                <div class="card-price">1,300,000원 부터</div>
             </div>
-
             <div class="card">
                 <div class="card-img"><img src="./울쎄라.png" alt="울쎄라피프라임"></div>
                 <div class="card-title">울쎄라피 프라임</div>
                 <div class="card-desc">더 깊은 피부층까지 정밀하게!</div>
-                <div class="card-price">600,000원 부터</div>
             </div>
-
             <div class="card">
                 <div class="card-img"><img src="./더블로골드.png" alt="더블로골드"></div>
                 <div class="card-title">더블로골드</div>
                 <div class="card-desc">차세대 고주파 리프팅</div>
-                <div class="card-price">690,000원 부터</div>
             </div>
-
             <div class="card">
                 <div class="card-img"><img src="./브이로어드밴스.png" alt="브이로어드밴스"></div>
                 <div class="card-title">브이로어드밴스</div>
-                <div class="card-price">550,000원 부터</div>
             </div>
-
             <div class="card">
                 <div class="card-img"><img src="./올리지오.png" alt="올리지오"></div>
                 <div class="card-title">올리지오</div>
-                <div class="card-price">450,000원 부터</div>
             </div>
-
             <div class="card">
                 <div class="card-img"><img src="./인모드.png" alt="인모드"></div>
                 <div class="card-title">인모드</div>
-                <div class="card-price">520,000원 부터</div>
             </div>
-
             <div class="card">
                 <div class="card-img"><img src="./슈링크유니버스.png" alt="슈링크유니버스"></div>
                 <div class="card-title">슈링크 유니버스</div>
-                <div class="card-price">390,000원 부터</div>
             </div>
-
-
         </div>
     </div>
 </section>
+
     <section class="media-bg">
         <div class="inner">
             <h2 class="section-title">MEDIA</h2>
@@ -583,25 +522,11 @@
         </div>
     </footer>
 
-<!-- 사이드바 -->
 <div class="side-bar">
-
-<a href="https://pf.kakao.com" target="_blank">
-카톡
-</a>
-
-<a href="https://instagram.com" target="_blank">
-인스타
-</a>
-
-<a href="https://blog.naver.com" target="_blank">
-블로그
-</a>
-
-<a onclick="scrollToTop()" style="cursor:pointer;">
-TOP
-</a>
-
+    <a href="https://pf.kakao.com" target="_blank">카톡</a>
+    <a href="https://instagram.com" target="_blank">인스타</a>
+    <a href="https://blog.naver.com" target="_blank">블로그</a>
+    <a onclick="scrollToTop()" style="cursor:pointer;">TOP</a>
 </div>
 
 <script>
@@ -613,6 +538,65 @@ function scrollToTop() {
 }
 </script>
 
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const popup = document.getElementById('mainPopup');
+        const closeBtn = document.getElementById('closeBtn');
+        const closeTodayBtn = document.getElementById('closeTodayBtn');
+
+        const hidePopupDate = localStorage.getItem('hideBrogPopup_01');
+        const today = new Date().toISOString().split('T')[0];
+
+        if (hidePopupDate !== today) {
+            setTimeout(function() {
+                popup.classList.add('active');
+            }, 500);
+        }
+
+        closeBtn.addEventListener('click', function() {
+            popup.classList.remove('active');
+        });
+
+        closeTodayBtn.addEventListener('click', function() {
+            localStorage.setItem('hideBrogPopup_01', today);
+            popup.classList.remove('active');
+        });
+
+        const track = document.getElementById('sliderTrack');
+        const tabs = document.querySelectorAll('.tab');
+        let currentIndex = 0;
+        
+        // [수정] 전체 이미지 갯수를 5로 변경
+        const totalImages = 5; 
+        let slideInterval; 
+
+        // [수정] translateX 비율을 -20% 단위로 변경 (100% / 5 = 20%)
+        function updateSlider(index) {
+            track.style.transform = `translateX(-${index * 20}%)`;
+            tabs.forEach(tab => tab.classList.remove('active'));
+            tabs[index].classList.add('active');
+        }
+
+        function slideNext() {
+            currentIndex++;
+            if (currentIndex >= totalImages) {
+                currentIndex = 0; 
+            }
+            updateSlider(currentIndex);
+        }
+
+        slideInterval = setInterval(slideNext, 3000); 
+
+        tabs.forEach((tab, index) => {
+            tab.addEventListener('click', () => {
+                currentIndex = index;
+                updateSlider(currentIndex);
+                clearInterval(slideInterval);
+                slideInterval = setInterval(slideNext, 3000);
+            });
+        });
+    });
+</script>
 
 </body>
 </html>
