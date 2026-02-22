@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>필러 | 바로그의원 덕천</title>
+<link rel="icon" href="./Brog.png" type="image/png">
+<style>
+/* =========================================
+    ★ 공통 스타일 ★
+   ========================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Pretendard", sans-serif;
+}
+body {
+    background: #fff;
+    color: #111;
+    line-height: 1.6;
+}
+.inner {
+    max-width: 1200px;
+    margin: auto;
+    padding: 0 20px;
+}
+
+/* =========================================
+    ★ 헤더 ★
+   ========================================= */
+header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: transparent;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    z-index: 1000;
+}
+.header-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px;
+}
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #ffffff;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+.nav-menu {
+    display: flex;
+    gap: 30px;
+    list-style: none;
+    align-items: center;
+}
+.nav-menu > li {
+    position: relative;
+    height: 80px;
+    display: flex;
+    align-items: center;
+}
+.nav-menu > li > a {
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: bold;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+    transition: 0.3s;
+}
+.sub-menu {
+    display: none;
+    position: absolute;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.85);
+    list-style: none;
+    padding: 10px 0;
+    min-width: 140px;
+    text-align: center;
+    border-radius: 0 0 10px 10px;
+}
+.nav-menu > li:hover .sub-menu {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translate(-50%, -10px); }
+    to { opacity: 1; transform: translate(-50%, 0); }
+}
+.sub-menu li a {
+    display: block;
+    padding: 10px 20px;
+    color: #ccc;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+/* =========================================
+    ★ 상단 동영상 배너 ★
+   ========================================= */
+.top-video-banner {
+    position: relative;
+    width: 100%;
+    height: 430px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.top-video-banner video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 100%;
+    min-height: 100%;
+    object-fit: cover;
+    filter: brightness(0.5);
+    z-index: 1;
+}
+.top-video-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: #fff;
+    margin-top: 50px;
+}
+.top-video-content h2 {
+    font-size: 42px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+}
+
+/* =========================================
+    ★ 레이아웃 (좌측 메뉴 중앙 정렬) ★
+   ========================================= */
+.page-container {
+    display: flex;
+    gap: 60px;
+    padding-top: 80px;
+    padding-bottom: 80px;
+    align-items: flex-start;
+}
+
+/* 사이드바 영역 최적화 및 중앙정렬 */
+.left-menu {
+    width: 110px; 
+    flex-shrink: 0;
+    position: sticky;
+    top: 120px;
+    z-index: 10;
+    text-align: center; 
+}
+
+.left-menu h3 {
+    font-size: 20px;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #111;
+    display: block;
+    width: 100%;
+}
+
+.left-menu ul {
+    list-style: none;
+}
+
+.left-menu li {
+    margin-bottom: 5px;
+}
+
+.left-menu li a {
+    display: block;
+    padding: 12px 0;
+    color: #666;
+    text-decoration: none;
+    font-size: 15px;
+    border-bottom: 1px solid #eee;
+    transition: 0.3s;
+    white-space: nowrap;
+}
+
+.left-menu li.active a,
+.left-menu li a:hover {
+    color: #d9534f;
+    font-weight: bold;
+}
+
+.content-area {
+    flex: 4;
+    min-width: 0;
+}
+
+/* =========================================
+    ★ 본문 상세 스타일 ★
+   ========================================= */
+.filler-intro-wrap { display: flex; gap: 40px; align-items: center; margin-bottom: 80px; }
+.filler-text { flex: 1; }
+.filler-text h3 { font-size: 32px; margin-bottom: 20px; font-weight: 800; color: #111; }
+.filler-text p { font-size: 17px; color: #444; word-break: keep-all; margin-bottom: 15px; }
+.filler-text .point-txt { color: #d9534f; font-weight: bold; }
+.filler-image { width: 380px; flex-shrink: 0; }
+.filler-image img { width: 100%; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+
+.filler-detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 80px; }
+.detail-item { background: #fbfbfb; padding: 25px; border-radius: 15px; border: 1px solid #f0f0f0; }
+.detail-item h4 { font-size: 19px; margin-bottom: 10px; color: #333; display: flex; align-items: center; gap: 8px; }
+.detail-item h4::before { content: '✔'; color: #d9534f; }
+.detail-item p { font-size: 15px; color: #666; word-break: keep-all; }
+
+.section-title { font-size: 28px; text-align: center; margin-bottom: 40px; font-weight: bold; position: relative; padding-bottom: 15px; }
+.section-title::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 40px; height: 3px; background: #333; }
+
+.precaution-box { background: #fffafa; border: 1px solid #ffebeb; padding: 30px; border-radius: 15px; margin-bottom: 80px; }
+.precaution-list { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 15px 40px; }
+.precaution-list li { font-size: 15px; color: #555; position: relative; padding-left: 15px; }
+.precaution-list li::before { content: ''; position: absolute; left: 0; top: 10px; width: 4px; height: 4px; background: #d9534f; border-radius: 50%; }
+
+/* 가격 안내 섹션 */
+.ampoule-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 30px; }
+.ampoule-card { display: flex; flex-direction: column; border: 1px solid #eee; border-radius: 20px; background: #fff; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+.highlight-card { border: 2px solid #333 !important; }
+.ampoule-img { height: 200px; background-size: contain; background-repeat: no-repeat; background-position: center; margin: 20px 0; }
+.ampoule-content { padding: 0 20px 20px 20px; }
+.ampoule-title { background: #fcfcfc; padding: 20px; font-size: 20px; font-weight: 800; text-align: center; border-bottom: 1px solid #eee; margin-bottom: 15px; }
+.brand-badge { display: inline-block; padding: 3px 10px; border-radius: 50px; background: #eee; font-size: 11px; margin-bottom: 8px; color: #777; }
+.price-table { width: 100%; border-collapse: collapse; }
+.price-table td { padding: 12px 10px; font-size: 14px; border-bottom: 1px solid #f9f9f9; }
+.price-table td.price-val { text-align: right; font-weight: 700; color: #d9534f; }
+
+/*주의사항 첫줄 글자 진하게*/
+.precaution-title {
+    font-weight: 700;
+    color: #111;
+    display: inline-block;
+    margin-bottom: 3px;}
+
+/* =========================================
+    ★ 푸터 & 사이드바 ★
+   ========================================= */
+footer { background: #111; color: #bbb; padding: 60px 0; font-size: 14px; margin-top: 80px; }
+.footer-info span { display: inline-block; margin-bottom: 5px; }
+.side-bar { position: fixed; right: 30px; bottom: 120px; display: flex; flex-direction: column; gap: 12px; z-index: 9999; }
+.side-bar a { width: 60px; height: 60px; background: #111; color: #fff; text-decoration: none; font-size: 12px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: 0.25s; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+.side-bar a:hover { background: #d9534f; transform: translateY(-3px); }
+
+/* 부가세 안내 문구 스타일 */
+.vat-notice {
+    text-align: right;
+    font-size: 13px;
+    color: #888;
+    margin-bottom: 15px;
+}
+
+.card-vat {
+    font-size: 11px;
+    color: #999;
+    text-align: right;
+    padding-top: 10px;
+    border-top: 1px dashed #eee;
+    margin-top: 5px;
+}
+
+
+/* =========================================
+    ★ 모바일 반응형 (핵심 수정 부분) ★
+   ========================================= */
+@media screen and (max-width: 768px) {
+    .header-line { flex-direction: column; height: auto; padding: 15px 0; gap: 15px; }
+    .nav-menu { gap: 15px; }
+    
+    .page-container { flex-direction: column; gap: 40px; padding-top: 40px; }
+    
+    /* 좌측 메뉴 모바일 스타일 */
+    .left-menu { width: 100%; position: static; text-align: center; }
+    .left-menu h3 { width: fit-content; margin: 0 auto 20px; padding: 0 10px 10px; }
+    .left-menu ul { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+    .left-menu li { margin-bottom: 0; }
+    .left-menu li a { border: 1px solid #eee; padding: 8px 15px; border-radius: 20px; border-bottom: 1px solid #eee; }
+
+    .filler-intro-wrap { flex-direction: column-reverse; }
+    .filler-image { width: 100%; }
+    .filler-detail-grid { grid-template-columns: 1fr; }
+    .precaution-list { grid-template-columns: 1fr; }
+    .ampoule-list { grid-template-columns: 1fr; }
+    .side-bar { right: 15px; bottom: 80px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+    <div class="inner">
+        <div class="header-line">
+            <a href="index.html" class="logo">바로그의원 덕천</a>
+            <ul class="nav-menu">
+                <li><a href="staff.html">병원소개</a></li>
+                <li><a href="#">피부시술</a></li>
+                <li>
+                    <a href="botox.html">쁘띠시술</a>
+                    <ul class="sub-menu">
+                        <li><a href="botox.html">보톡스</a></li>
+                        <li><a href="#">스킨부스터</a></li>
+                        <li><a href="#">콜라겐부스터</a></li>
+                        <li><a href="filler.html">필러</a></li>
+                        <li><a href="#">실리프팅</a></li>
+                    </ul>
+                </li>
+                <li><a href="event.html">이벤트</a></li>
+                <li><a href="#">칭찬/불만</a></li>
+            </ul>
+        </div>
+    </div>
+</header>
+
+<div class="top-video-banner">
+    <video autoplay muted loop playsinline><source src="./main.mp4" type="video/mp4"></video>
+    <div class="top-video-content">
+        <h2>Filler</h2>
+        <p>자연스럽게 완성하는 아름다운 라인, 바로그의원 필러</p>
+    </div>
+</div>
+
+<div class="inner page-container">
+    <aside class="left-menu">
+        <h3>쁘띠시술</h3>
+        <ul>
+            <li><a href="botox.html">보톡스</a></li>
+            <li><a href="#">스킨부스터</a></li>
+            <li><a href="#">콜라겐부스터</a></li>
+            <li class="active"><a href="filler.html">필러</a></li>
+            <li><a href="#">실리프팅</a></li>
+        </ul>
+    </aside>
+
+    <main class="content-area">
+        <div class="filler-intro-wrap">
+            <div class="filler-text">
+                <h3>필러(Filler)란?</h3>
+                <p>필러는 피부 속이 꺼지거나 주름이 생긴 부위에 인체에 안전한 성분을 주입하여
+                     <span class="point-txt">'볼륨을 채우고 윤곽을 개선하는 시술'</span>
+                    입니다.</p>
+                    <p>보톡스가 근육의 움직임을 완화해 주름을 펴는 방식이라면, <br> 필러는 
+                     <span class="point-txt">'꺼진 부위를 직접 채워 형태를 보완'</span>
+                    하는 것이 가장 큰 차이점입니다.</p>
+                <p>바로그의원 덕천점은 <span class="point-txt">1:1 맞춤 디자인</span>으로 가장 자연스럽고 세련된 변화를 약속합니다.</p>
+            </div>
+            <div class="filler-image"><img src="필러영역얼굴.jpg" alt="필러"></div>
+        </div>
+
+        <div class="filler-detail-grid">
+            <div class="detail-item"><h4>볼륨 필러</h4>
+                <p>꺼진 부위에 자연스러운 볼륨을 더해 또렷한 윤곽을 완성합니다.<br>
+                (볼륨 개선을 원하는 분께 추천합니다.)</p></div>
+            <div class="detail-item"><h4>라인 필러</h4>
+                <p>주름과 패인 라인을 매끄럽게 정돈해 부드러운 인상을 완성합니다.
+                    <br>(주름 개선을 원하는 분께 적합합니다.)</p></div>
+            <div class="detail-item"><h4>윤곽 필러</h4>
+                <p>턱선, 콧대 등 얼굴 라인을 또렷하게 보완합니다.
+                    <br>(입체적인 변화를 원하는 분께 추천합니다.)</p></div>
+            <div class="detail-item"><h4>탄력·리프팅 필러</h4>
+                <p>처진 부위를 자연스럽게 지지해 탄력 있는 인상을 완성합니다.
+                    <br>(탄력 개선을 원하는 분께 적합합니다.) </p></div>
+        </div>
+
+        <h3 class="section-title">시술 후 주의사항</h3>
+        <div class="precaution-box">
+            <ul class="precaution-list">
+                <li><span class="precaution-title">음주·흡연 자제</span><br>
+                    시술 후 3~7일간 음주와 흡연은 염증 및 붓기를 유발할 수 있어 피하는 것이 좋습니다.</li>
+                <li><span class="precaution-title">과도한 압박 금지</span><br>
+                    시술 부위를 강하게 누르거나 마사지하는 행동은 형태 변형을 유발할 수 있어 주의합니다.</li>
+                <li><span class="precaution-title">사우나·격한 운동 자제</span><br>
+                    고온 환경과 격한 운동은 붓기와 멍을 악화시킬 수 있어 일정 기간 피하는 것이 좋습니다.</li>
+                <li><span class="precaution-title">이상 증상 시 내원</span><br>
+                    심한 통증, 지속적인 붓기, 색 변화 등 이상 증상이 있을 경우 즉시 내원합니다.</li>
+            </ul>
+        </div>
+
+        <h3 class="section-title">필러 제품 및 가격안내</h3>
+        <p class="vat-notice">* 모든 시술 비용에 부가세 10% 별도로 부과됩니다.</p>
+        <div class="ampoule-list">
+            <div class="ampoule-card highlight-card">
+                <div class="ampoule-title"><span class="brand-badge">국산</span><br>아띠에르</div>
+                <div class="ampoule-img" style="background-image:url('나보타.png')"></div>
+                <div class="ampoule-content">
+                    <table class="price-table">
+                        <tr><td>아띠에르 1cc</td>
+                            <td class="price-val">80,000</td></tr>
+                        <tr><td>입술+입꼬리</td>
+                            <td class="price-val">80,000</td></tr>                
+                    </table>
+                </div>
+            </div>
+
+            <div class="ampoule-card highlight-card">
+                <div class="ampoule-title"><span class="brand-badge">국산</span><br>뉴라미스</div>
+                <div class="ampoule-img" style="background-image:url('뉴라미스.png')"></div>
+                <div class="ampoule-content">
+                    <table class="price-table">
+                        <tr><td>뉴라미스 1cc </td>
+                            <td class="price-val">100,000</td></tr>
+                        <tr><td>입술+입꼬리</td>
+                            <td class="price-val">120,000</td></tr>                        
+                    </table>
+                </div>
+            </div>
+
+            <div class="ampoule-card highlight-card">
+                <div class="ampoule-title"><span class="brand-badge">국산</span><br>뉴라미스 하트</div>
+                <div class="ampoule-img" style="background-image:url('뉴라미스.png')"></div>
+                <div class="ampoule-content">
+                    <table class="price-table">
+                        <tr><td>누운귀</td>
+                            <td class="price-val">150,000</td></tr>                        
+                    </table>
+                </div>
+            </div>
+
+            <div class="ampoule-card highlight-card">
+                <div class="ampoule-title"><span class="brand-badge">국산</span><br>채움 프리미엄</div>
+                <div class="ampoule-img" style="background-image:url('채움.png')"></div>
+                <div class="ampoule-content">
+                    <table class="price-table">
+                        <tr><td>채움 프리미엄 1cc</td>
+                            <td class="price-val">130,000</td></tr>
+                        <tr><td>입술+입꼬리</td>
+                            <td class="price-val">150,000</td></tr>                        
+                    </table>
+                </div>
+            </div>
+
+            <div class="ampoule-card highlight-card">
+                <div class="ampoule-title"><span class="brand-badge">ㅡ</span><br>스타일에이지</div>
+                <div class="ampoule-img" style="background-image:url('스타일에이지.png')"></div>
+                <div class="ampoule-content">
+                    <table class="price-table">
+                        <tr><td>스타일에이지 1cc</td>
+                            <td class="price-val">200,000</td></tr>
+                        <tr><td>입술+입꼬리</td>
+                            <td class="price-val">220,000</td></tr>                        
+                    </table>
+                </div>
+            </div>
+
+            <div class="ampoule-card highlight-card">
+                <div class="ampoule-title"><span class="brand-badge">ㅡ산</span><br>벨로테로</div>
+                <div class="ampoule-img" style="background-image:url('벨로테로.png')"></div>
+                <div class="ampoule-content">
+                    <table class="price-table">
+                        <tr><td>벨로테로 1cc</td>
+                            <td class="price-val">250,000</td></tr>
+                        <tr><td>입술+입꼬리</td>
+                            <td class="price-val">250,000</td></tr>                                            </table>
+                </div>
+            </div>
+
+            <div class="ampoule-card highlight-card">
+                <div class="ampoule-title"><span class="brand-badge">ㅡ산</span><br>레스틸렌</div>
+                <div class="ampoule-img" style="background-image:url('레스틸렌.png')"></div>
+                <div class="ampoule-content">
+                    <table class="price-table">
+                        <tr><td>레스틸렌 1cc</td>
+                            <td class="price-val">290,000</td></tr>
+                        <tr><td>미간/콧등 각각</td>
+                            <td class="price-val">320,000</td></tr>
+                        <tr><td>미간+콧등 </td>
+                            <td class="price-val">450,000</td></tr>                                                  </table>
+                </div>
+            </div>
+
+            <div class="ampoule-card highlight-card">
+                <div class="ampoule-title"><span class="brand-badge">ㅡ산</span><br>레스틸렌 아이라이트</div>
+                <div class="ampoule-img" style="background-image:url('아이라이트.png')"></div>
+                <div class="ampoule-content">
+                    <table class="price-table">
+                        <tr><td>레스틸렌 아이라이트 1cc</td>
+                            <td class="price-val">320,000</td></tr>
+                        <tr><td>애교/눈밑 각각</td>
+                            <td class="price-val">320,000</td></tr>                                                                      </table>
+                </div>
+            </div>
+            
+        </div>
+    </main>
+</div>
+
+<footer>
+    <div class="inner">
+        <div class="footer-info">
+            <span>바로그의원 덕천 | 대표 : 이용재</span><br>
+            <span>부산시 북구 만덕대로 24 4층 | TEL : 051-343-2255</span>
+        </div>
+    </div>
+</footer>
+
+<div class="side-bar">
+    <a href="#" target="_blank">카톡</a>
+    <a href="#" target="_blank">인스타</a>
+    <a href="#" target="_blank">블로그</a>
+    <a onclick="window.scrollTo({top:0, behavior:'smooth'})" style="cursor:pointer;">TOP</a>
+</div>
+
+</body>
+</html>
